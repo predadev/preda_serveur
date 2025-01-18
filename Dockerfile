@@ -17,4 +17,4 @@ COPY eula.txt .
 EXPOSE 25565
 
 # Lancer le serveur Minecraft avec 2 Go de RAM
-CMD ["java", "-Xmx2G", "-Xms2G", "-jar", "server.jar", "nogui"]
+CMD ["java", "-Xmx2G", "-Xms2G", "-jar", "server.jar", "--port", "${PORT:-25565}", "nogui"]
