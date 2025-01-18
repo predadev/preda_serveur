@@ -1,20 +1,20 @@
 # Utiliser l'image Docker officielle d'OpenJDK 17
 FROM openjdk:17-jdk-slim
 
-# Mettre à jour les paquets et installer curl
+# Mettre à jour les paquets et installer curl (si besoin pour d'autres actions)
 RUN apt-get update && apt-get install -y curl
 
 # Définir le répertoire de travail dans le conteneur
 WORKDIR /minecraft
 
-# Télécharger le fichier server.jar depuis Google Drive
-RUN curl -L -o server.jar "https://drive.google.com/uc?export=download&id=10tWKEawWQ9Ynyq3HJIiAkMqP_DIxGewa"
+# Copier le fichier server.jar depuis GitHub dans le conteneur
+COPY server.jar .
 
-# Copier le fichier eula.txt dans le conteneur (assurez-vous que ce fichier accepte l'EULA de Minecraft)
+# Copier le fichier eula.txt pour accepter l'EULA de Minecraft
 COPY eula.txt .
 
-# Exposer le port par défaut de Minecraft
+# Exposer le port par défaut de Minecraft (25565)
 EXPOSE 25565
 
-# Lancer le serveur Minecraft
+# Lancer le serveur Minecraft avec 2 Go de RAM
 CMD ["java", "-Xmx2G", "-Xms2G", "-jar", "server.jar", "nogui"]
