@@ -1,6 +1,9 @@
 # Utiliser l'image Docker officielle d'OpenJDK 17
 FROM openjdk:17-jdk-slim
 
+# Mettre à jour les paquets et installer curl
+RUN apt-get update && apt-get install -y curl
+
 # Définir le répertoire de travail dans le conteneur
 WORKDIR /minecraft
 
